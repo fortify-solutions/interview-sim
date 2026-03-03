@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexagen Labs — Analyst Assessment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- INTRO SCREEN                                            -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="intro-screen" class="screen active">
+    <div class="intro-bg">
+      <div class="hex-grid"></div>
+    </div>
+    <div class="intro-card">
+      <div class="intro-logo">
+        <svg class="logo-hex" viewBox="0 0 48 48" fill="none">
+          <path d="M24 4L42 14.5V33.5L24 44L6 33.5V14.5L24 4Z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M24 12L36 18.5V31.5L24 38L12 31.5V18.5L24 12Z" fill="currentColor" opacity="0.15"/>
+          <circle cx="24" cy="24" r="4" fill="currentColor"/>
+        </svg>
+        <div class="logo-text-group">
+          <span class="logo-name">NEXAGEN LABS</span>
+          <span class="logo-tagline">Internal Assessment Portal</span>
+        </div>
+      </div>
+
+      <div class="intro-divider"></div>
+
+      <h1 class="intro-title">Graduate Analyst Program<br><span>Day-in-the-Life Simulation</span></h1>
+
+      <div class="intro-body">
+        <p>You've been invited to complete a structured work simulation as part of your application to Nexagen Labs' <strong>Graduate Analyst Program (DEPD Division)</strong>.</p>
+        <p>For the next hour, you'll step into the role of a <strong>Junior Analyst</strong> on the <strong>Project Chimera</strong> team — a groundbreaking initiative studying three newly discovered extremophile organisms.</p>
+
+        <div class="intro-features">
+          <div class="intro-feature">
+            <div class="feature-icon">📨</div>
+            <div>
+              <strong>Inbox</strong>
+              <span>Receive tasks from your team via email</span>
+            </div>
+          </div>
+          <div class="intro-feature">
+            <div class="feature-icon">🗂</div>
+            <div>
+              <strong>Intranet</strong>
+              <span>Browse the company knowledge base to find what you need</span>
+            </div>
+          </div>
+          <div class="intro-feature">
+            <div class="feature-icon">📋</div>
+            <div>
+              <strong>Deliverables</strong>
+              <span>Submit professional responses to each task</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="intro-note">
+          <strong>Tips:</strong> The Intranet contains everything you need — use it freely. If something is unclear, look for guides or glossaries. A new task may arrive after each submission. Respond professionally.
+        </div>
+      </div>
+
+      <input
+        type="text"
+        id="candidate-name-input"
+        placeholder="Enter your full name to begin"
+        maxlength="60"
+        autocomplete="off"
+        style="width:100%;padding:12px 16px;background:#0d1117;border:1px solid #2a3548;border-radius:8px;color:#e2e8f0;font-size:15px;font-family:inherit;margin-bottom:12px;outline:none;"
+      >
+
+      <button id="start-btn" class="btn btn-primary btn-lg">
+        <span>Begin Assessment</span>
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- WORKSPACE                                               -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="workspace" class="screen">
+
+    <header class="app-header">
+      <div class="header-brand">
+        <svg class="logo-hex-sm" viewBox="0 0 48 48" fill="none">
+          <path d="M24 4L42 14.5V33.5L24 44L6 33.5V14.5L24 4Z" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="4" fill="currentColor"/>
+        </svg>
+        <span class="brand-name">NEXAGEN</span>
+        <span class="brand-divider">|</span>
+        <span class="brand-portal">Internal Portal</span>
+      </div>
+
+      <div class="header-progress">
+        <div class="progress-track">
+          <div class="progress-step" id="prog-1" data-task="1">
+            <div class="step-dot"></div>
+            <span>Task 1</span>
+          </div>
+          <div class="progress-line" id="prog-line-1"></div>
+          <div class="progress-step" id="prog-2" data-task="2">
+            <div class="step-dot"></div>
+            <span>Task 2</span>
+          </div>
+          <div class="progress-line" id="prog-line-2"></div>
+          <div class="progress-step" id="prog-3" data-task="3">
+            <div class="step-dot"></div>
+            <span>Task 3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-meta">
+        <div class="timer-block">
+          <span class="timer-label">ELAPSED</span>
+          <span id="timer" class="timer-value">00:00</span>
+        </div>
+        <div class="user-chip">Junior Analyst</div>
+      </div>
+    </header>
+
+    <main class="workspace-body">
+
+      <!-- ─── EMAIL PANEL ─────────────────────────────────── -->
+      <section class="panel" id="inbox-panel">
+        <div class="panel-header">
+          <span class="panel-title">Inbox</span>
+          <span class="badge" id="unread-badge">1</span>
+        </div>
+        <div class="email-list" id="email-list">
+          <!-- populated by JS -->
+        </div>
+        <div class="email-viewer" id="email-viewer">
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>Select an email to read</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── INTRANET PANEL ──────────────────────────────── -->
+      <section class="panel" id="intranet-panel">
+        <div class="panel-header">
+          <span class="panel-title">Intranet</span>
+          <div class="search-wrap">
+            <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+            <input type="text" id="intranet-search" placeholder="Search files…" autocomplete="off">
+          </div>
+        </div>
+        <div class="intranet-body">
+          <div class="file-tree" id="file-tree">
+            <!-- populated by JS -->
+          </div>
+          <div class="file-viewer" id="file-viewer">
+            <div class="empty-state">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>Select a file to view</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── DELIVERABLE PANEL ──────────────────────────── -->
+      <section class="panel" id="deliverable-panel">
+        <div class="panel-header">
+          <span class="panel-title">Deliverable</span>
+          <span class="task-badge" id="task-badge"></span>
+        </div>
+        <div class="deliverable-body">
+          <div class="task-prompt" id="task-prompt">
+            <div class="empty-state">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+              <span>Read your inbox to get started</span>
+            </div>
+          </div>
+          <div class="response-wrap" id="response-wrap" style="display:none">
+            <label class="response-label" for="response-area">Your Response</label>
+            <textarea id="response-area" placeholder="Type your professional response here…" spellcheck="true"></textarea>
+            <div class="response-footer">
+              <div class="char-count" id="char-count">0 characters</div>
+              <button id="submit-btn" class="btn btn-primary" disabled>
+                Submit Response
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- New email toast -->
+    <div class="toast" id="toast" aria-live="polite">
+      <span class="toast-icon">📨</span>
+      <span id="toast-msg">New email received</span>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- RESULTS SCREEN                                          -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="results-screen" class="screen">
+    <div class="results-wrap">
+      <div class="results-header">
+        <svg class="logo-hex-lg" viewBox="0 0 48 48" fill="none">
+          <path d="M24 4L42 14.5V33.5L24 44L6 33.5V14.5L24 4Z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M24 12L36 18.5V31.5L24 38L12 31.5V18.5L24 12Z" fill="currentColor" opacity="0.2"/>
+          <circle cx="24" cy="24" r="4" fill="currentColor"/>
+        </svg>
+        <div>
+          <h1>Assessment Complete</h1>
+          <p>Project Chimera Science Mission — Junior Analyst Evaluation</p>
+        </div>
+      </div>
+
+      <div class="results-score-card">
+        <div class="score-ring-wrap">
+          <svg class="score-ring" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+          </svg>
+          <div class="score-center">
+            <div class="score-number" id="total-score-num">0</div>
+            <div class="score-denom">/ 100</div>
+          </div>
+        </div>
+        <div class="score-meta">
+          <h2 class="score-title" id="score-title">Self-Reliance Score</h2>
+          <p class="score-desc" id="score-desc">Calculating…</p>
+          <div class="score-bars" id="score-bars"></div>
+        </div>
+      </div>
+
+      <div class="results-breakdown" id="results-breakdown"></div>
+
+      <div class="results-log-section">
+        <h3>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+          Full Activity Log
+        </h3>
+        <div class="event-log" id="event-log-display"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

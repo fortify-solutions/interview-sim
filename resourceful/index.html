@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resourceful Graduate Challenge</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 1: START                                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <div id="screen-start" class="screen active">
+    <div class="start-card">
+      <div class="start-brand">
+        <div class="start-logo">RGC</div>
+        <h1>Resourceful Graduate<br>Challenge</h1>
+        <p class="start-subtitle">A 20-minute interview simulation</p>
+      </div>
+
+      <div class="start-description">
+        <p>Welcome to your interview assessment. You'll be working inside a simulated company workspace to complete three tasks. The workspace includes project documents, a team wiki, a code repository, and a search tool.</p>
+        <p>Your <strong>Self-Reliance Index</strong> will be scored based on how well you explore the workspace, persist through challenges, and complete tasks efficiently.</p>
+      </div>
+
+      <div class="start-form">
+        <div class="form-group">
+          <label for="input-name">Your Full Name</label>
+          <input type="text" id="input-name" placeholder="e.g. Jane Smith" autocomplete="off">
+        </div>
+
+        <button class="btn btn-primary btn-large" id="btn-start">Begin Assessment</button>
+
+        <button class="btn btn-ghost btn-small" id="btn-show-settings">⚙ API Key Settings (optional)</button>
+      </div>
+
+      <div id="settings-panel" class="settings-panel hidden">
+        <p class="settings-note">Paste an Anthropic API key to enable live AI responses from Alex, your onboarding manager. Without it, Alex uses pre-scripted responses.</p>
+        <div class="form-group">
+          <label for="input-apikey">Anthropic API Key</label>
+          <input type="password" id="input-apikey" placeholder="sk-ant-...">
+        </div>
+        <button class="btn btn-secondary btn-small" id="btn-save-apikey">Save Key</button>
+        <span id="apikey-status" class="apikey-status"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 2: WORKSPACE                                             -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <div id="screen-workspace" class="screen hidden">
+
+    <!-- HEADER -->
+    <header class="workspace-header">
+      <div class="header-brand">
+        <span class="header-logo">M</span>
+        <span class="header-title">Meridian Intranet</span>
+      </div>
+
+      <div class="header-search">
+        <input type="text" id="search-input" placeholder="Search workspace..." autocomplete="off">
+        <button id="btn-search" class="search-btn">⌕</button>
+      </div>
+
+      <div class="header-controls">
+        <div class="timer-display" id="timer-display">
+          <span class="timer-icon">◷</span>
+          <span id="timer-value">20:00</span>
+        </div>
+        <button class="icon-btn" id="btn-workspace-settings" title="Settings">⚙</button>
+      </div>
+    </header>
+
+    <!-- SEARCH RESULTS DROPDOWN -->
+    <div id="search-results" class="search-results hidden"></div>
+
+    <!-- BODY -->
+    <div class="workspace-body">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+
+          <div class="sidebar-section">
+            <div class="sidebar-section-title">Tasks</div>
+            <div id="task-nav-items" class="task-nav-items">
+              <div class="task-nav-item active" data-tier="1">
+                <span class="task-badge tier-1">T1</span>
+                <span>Lookup Challenge</span>
+              </div>
+              <div class="task-nav-item locked" data-tier="2">
+                <span class="task-badge tier-2">T2</span>
+                <span>Debug Challenge</span>
+              </div>
+              <div class="task-nav-item locked" data-tier="3">
+                <span class="task-badge tier-3">T3</span>
+                <span>Synthesis Challenge</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-section-title">Workspace Files</div>
+            <ul class="sidebar-list">
+              <li class="sidebar-item" data-page="brief">
+                <span class="file-icon">📋</span> Project Brief
+              </li>
+              <li class="sidebar-item" data-page="wiki-home">
+                <span class="file-icon">📚</span> Team Wiki
+                <ul class="sidebar-sublist" id="wiki-sublist">
+                  <li class="sidebar-subitem" data-page="wiki-home">Home</li>
+                  <li class="sidebar-subitem" data-page="wiki-arch">Architecture</li>
+                  <li class="sidebar-subitem" data-page="wiki-api">API Docs</li>
+                  <li class="sidebar-subitem" data-page="wiki-frontend">Frontend Specs</li>
+                  <li class="sidebar-subitem" data-page="wiki-backend">Backend Services</li>
+                  <li class="sidebar-subitem" data-page="wiki-meetings">Meeting Notes</li>
+                  <li class="sidebar-subitem" data-page="wiki-compliance">Compliance</li>
+                  <li class="sidebar-subitem" data-page="wiki-old">Old Projects</li>
+                </ul>
+              </li>
+              <li class="sidebar-item" data-page="repo">
+                <span class="file-icon">💻</span> Code Repository
+              </li>
+              <li class="sidebar-item" data-page="dashboard">
+                <span class="file-icon">📊</span> Dashboard
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section" id="discovered-section" style="display:none">
+            <div class="sidebar-section-title">Discovered Files</div>
+            <ul class="sidebar-list" id="discovered-list"></ul>
+          </div>
+
+        </nav>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content" id="main-content">
+
+        <!-- TASK PANEL -->
+        <div class="task-panel" id="task-panel">
+          <div class="task-panel-header" id="task-panel-toggle">
+            <div class="task-panel-title">
+              <span id="task-panel-badge" class="task-badge tier-1">T1</span>
+              <span id="task-panel-label">Current Task</span>
+            </div>
+            <button class="collapse-btn" id="task-collapse-btn">▲</button>
+          </div>
+          <div class="task-panel-body" id="task-panel-body">
+            <p id="task-prompt" class="task-prompt"></p>
+            <div id="task-input-area" class="task-input-area">
+              <textarea id="task-answer" class="task-textarea" placeholder="Type your answer here..."></textarea>
+            </div>
+            <div class="task-actions">
+              <button class="btn btn-ghost btn-small" id="btn-hint">💡 Hint</button>
+              <button class="btn btn-primary" id="btn-submit-task">Submit Answer</button>
+            </div>
+            <div id="task-feedback" class="task-feedback hidden"></div>
+          </div>
+        </div>
+
+        <!-- DOCUMENT VIEWER -->
+        <div class="document-viewer" id="document-viewer">
+          <div class="document-breadcrumb" id="doc-breadcrumb">Dashboard</div>
+          <div class="document-content" id="doc-content">
+            <!-- injected by JS -->
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- CHAT WIDGET -->
+    <div class="chat-widget" id="chat-widget">
+      <div class="chat-header" id="chat-toggle">
+        <div class="chat-header-info">
+          <div class="chat-avatar">A</div>
+          <div>
+            <div class="chat-name">Alex</div>
+            <div class="chat-status">Onboarding Manager</div>
+          </div>
+        </div>
+        <div class="chat-header-right">
+          <span class="chat-unread hidden" id="chat-unread">0</span>
+          <span class="chat-chevron">▲</span>
+        </div>
+      </div>
+      <div class="chat-body hidden" id="chat-body">
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-row">
+          <input type="text" id="chat-input" placeholder="Message Alex..." autocomplete="off">
+          <button id="btn-send-chat" class="chat-send-btn">↑</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <div class="modal-overlay hidden" id="settings-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Settings</h3>
+          <button class="modal-close" id="btn-close-settings">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="modal-apikey">Anthropic API Key</label>
+            <input type="password" id="modal-apikey" placeholder="sk-ant-...">
+            <p class="settings-note">Enables live AI responses from Alex using Claude Haiku.</p>
+          </div>
+          <button class="btn btn-primary" id="btn-modal-save-apikey">Save Key</button>
+          <span id="modal-apikey-status" class="apikey-status"></span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /screen-workspace -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 3: SCORE                                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <div id="screen-score" class="screen hidden">
+    <div class="score-container">
+      <div class="score-header">
+        <div class="score-logo">RGC</div>
+        <h2>Assessment Complete</h2>
+        <p id="score-candidate-name" class="score-candidate"></p>
+      </div>
+
+      <div class="score-main">
+        <div class="sri-display">
+          <div class="sri-label">Self-Reliance Index</div>
+          <div class="sri-value" id="sri-value">—</div>
+          <div class="sri-bar-outer">
+            <div class="sri-bar-inner" id="sri-bar"></div>
+          </div>
+          <div class="sri-tier" id="sri-tier"></div>
+        </div>
+
+        <div class="score-breakdown">
+          <h3>Score Breakdown</h3>
+          <div class="breakdown-grid">
+            <div class="breakdown-item">
+              <div class="breakdown-label">Exploratory</div>
+              <div class="breakdown-score" id="score-exploratory">—</div>
+              <div class="breakdown-weight">40% weight</div>
+              <div class="breakdown-bar-outer">
+                <div class="breakdown-bar-inner" id="bar-exploratory"></div>
+              </div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-label">Persistence</div>
+              <div class="breakdown-score" id="score-persistence">—</div>
+              <div class="breakdown-weight">30% weight</div>
+              <div class="breakdown-bar-outer">
+                <div class="breakdown-bar-inner" id="bar-persistence"></div>
+              </div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-label">Efficiency</div>
+              <div class="breakdown-score" id="score-efficiency">—</div>
+              <div class="breakdown-weight">30% weight</div>
+              <div class="breakdown-bar-outer">
+                <div class="breakdown-bar-inner" id="bar-efficiency"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="score-details">
+        <div class="score-stats">
+          <h3>Session Stats</h3>
+          <div id="score-stats-grid" class="stats-grid"></div>
+        </div>
+        <div class="score-log">
+          <h3>Activity Log</h3>
+          <div id="activity-log" class="activity-log-list"></div>
+        </div>
+      </div>
+
+      <div class="score-footer">
+        <button class="btn btn-primary" id="btn-restart">Start New Assessment</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

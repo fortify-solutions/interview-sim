@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meridian Advisory — Candidate Assessment">
+  <title>Day One — Meridian Advisory</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     INTRO SCREEN
+══════════════════════════════════════════════════════════════════ -->
+<div id="intro-screen" class="screen active">
+  <div class="intro-card">
+    <div class="intro-logo">Meridian Advisory</div>
+    <h1>Day One</h1>
+    <p>Welcome to your first-round assessment.</p>
+    <p class="intro-subtitle">
+      Work through your first day independently — everything you need is in the system.
+      There are no hints or walkthroughs. Aim to complete the task before end of day.
+    </p>
+    <input
+      type="text"
+      id="player-name-input"
+      placeholder="Enter your full name to begin"
+      maxlength="50"
+      autocomplete="off"
+      aria-label="Your full name"
+    >
+    <button id="start-btn">Begin Assessment →</button>
+    <p class="intro-small">
+      This assessment takes approximately 20–35 minutes. Use only the tools provided
+      in the simulated desktop. All interactions are recorded for assessment purposes.
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     DESKTOP SCREEN
+══════════════════════════════════════════════════════════════════ -->
+<div id="desktop-screen" class="screen">
+
+  <div id="desktop-area">
+
+    <!-- Desktop icons (double-click to open) -->
+    <div id="desktop-icons" role="list" aria-label="Desktop applications">
+      <div class="desktop-icon" data-app="email" role="listitem" tabindex="0"
+           aria-label="Meridian Mail — double click to open"
+           ondblclick="openApp('email')"
+           onkeydown="if(event.key==='Enter')openApp('email')">
+        <div class="icon-img">✉️</div>
+        <div class="icon-label">Meridian Mail</div>
+      </div>
+      <div class="desktop-icon" data-app="files" role="listitem" tabindex="0"
+           aria-label="Files — double click to open"
+           ondblclick="openApp('files')"
+           onkeydown="if(event.key==='Enter')openApp('files')">
+        <div class="icon-img">📁</div>
+        <div class="icon-label">Files</div>
+      </div>
+      <div class="desktop-icon" data-app="browser" role="listitem" tabindex="0"
+           aria-label="Intranet — double click to open"
+           ondblclick="openApp('browser')"
+           onkeydown="if(event.key==='Enter')openApp('browser')">
+        <div class="icon-img">🌐</div>
+        <div class="icon-label">Intranet</div>
+      </div>
+      <div class="desktop-icon" data-app="chat" role="listitem" tabindex="0"
+           aria-label="Team Chat — double click to open"
+           ondblclick="openApp('chat')"
+           onkeydown="if(event.key==='Enter')openApp('chat')">
+        <div class="icon-img">💬</div>
+        <div class="icon-label">Team Chat</div>
+      </div>
+    </div>
+
+    <!-- Windows rendered here by JS -->
+    <div id="windows-container" aria-label="Open windows"></div>
+
+    <!-- Toast notifications -->
+    <div id="notification-area" aria-live="polite" aria-atomic="false"></div>
+
+    <!-- Discovery tracker -->
+    <div id="discovery-tracker" aria-label="Resources found">
+      <span id="discovery-label">Exploring...</span>
+      <div id="discovery-dots" role="img" aria-label="Discovery progress"></div>
+    </div>
+
+  </div><!-- /desktop-area -->
+
+  <!-- Taskbar -->
+  <div id="taskbar" role="toolbar" aria-label="Taskbar">
+    <div id="taskbar-start" aria-label="Meridian OS">Meridian OS</div>
+    <div id="taskbar-apps" role="group" aria-label="Open applications"></div>
+    <button
+      id="submit-response-btn"
+      title="Explore more before responding"
+      aria-label="Submit your response to the Hartwell situation"
+    >
+      Submit Response →
+    </button>
+    <div id="taskbar-clock" aria-label="System clock">
+      <span id="clock-time">9:15 AM</span>
+      <span id="clock-date">Tuesday, 4 Mar</span>
+    </div>
+  </div>
+
+</div><!-- /desktop-screen -->
+
+<!-- ══════════════════════════════════════════════════════════════════
+     DECISION SCREEN  (content injected by JS)
+══════════════════════════════════════════════════════════════════ -->
+<div id="decision-screen" class="screen"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     RESULTS SCREEN  (content injected by JS)
+══════════════════════════════════════════════════════════════════ -->
+<div id="results-screen" class="screen"></div>
+
+<!-- Scripts -->
+<script src="content.js"></script>
+<script src="analytics.js"></script>
+<script src="game.js"></script>
+
+</body>
+</html>

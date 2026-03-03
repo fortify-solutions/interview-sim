@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Sim — Prototype Gallery</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0d0f14;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 80px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #64748b;
+      border: 1px solid #1e2533;
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
+      color: #f1f5f9;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #64748b;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1080px;
+    }
+
+    .card {
+      background: #111827;
+      border: 1px solid #1e2533;
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.2s, transform 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      border-color: #3b4f6b;
+      transform: translateY(-2px);
+    }
+
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    .tag-gemini  { background: #0f2a1a; color: #34d399; border: 1px solid #064e3b; }
+    .tag-grok    { background: #1a1a2e; color: #818cf8; border: 1px solid #3730a3; }
+    .tag-o4      { background: #1e1a0f; color: #fbbf24; border: 1px solid #78350f; }
+    .tag-r1      { background: #1a0f0f; color: #f87171; border: 1px solid #7f1d1d; }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .card-company {
+      font-size: 13px;
+      color: #64748b;
+      font-style: italic;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: #94a3b8;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .meta-pill {
+      font-size: 11px;
+      color: #475569;
+      background: #0d1117;
+      border: 1px solid #1e2533;
+      border-radius: 20px;
+      padding: 3px 10px;
+    }
+
+    .card-cta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-top: 4px;
+      transition: color 0.15s;
+    }
+
+    .card:hover .card-cta { color: #f1f5f9; }
+
+    footer {
+      margin-top: 64px;
+      font-size: 12px;
+      color: #334155;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">Internal · Fortify</div>
+    <h1>Interview Sim<br>Prototype Gallery</h1>
+    <p class="subtitle">Four AI-generated riffs on a gamified interview stage. Results are emailed automatically on completion.</p>
+  </header>
+
+  <div class="grid">
+
+    <a href="nexagen/index.html" class="card">
+      <span class="card-tag tag-gemini">Gemini · v1</span>
+      <div>
+        <div class="card-title">Nexagen Labs</div>
+        <div class="card-company">Analyst Assessment Portal</div>
+      </div>
+      <p class="card-desc">A simulated company intranet with an inbox, file browser, and three sequential tasks. Scores on process quality and outcome accuracy.</p>
+      <div class="card-meta">
+        <span class="meta-pill">3 tasks</span>
+        <span class="meta-pill">Inbox + intranet</span>
+        <span class="meta-pill">~60 min</span>
+      </div>
+      <div class="card-cta">Open prototype →</div>
+    </a>
+
+    <a href="meridian/index.html" class="card">
+      <span class="card-tag tag-grok">Grok · v1</span>
+      <div>
+        <div class="card-title">Meridian Advisory</div>
+        <div class="card-company">Day One Assessment</div>
+      </div>
+      <p class="card-desc">A desktop OS simulation with email, file explorer, wiki, and team chat. Single decision scenario with exploration scoring.</p>
+      <div class="card-meta">
+        <span class="meta-pill">1 decision task</span>
+        <span class="meta-pill">Simulated desktop</span>
+        <span class="meta-pill">20–35 min</span>
+      </div>
+      <div class="card-cta">Open prototype →</div>
+    </a>
+
+    <a href="resourceful/index.html" class="card">
+      <span class="card-tag tag-o4">O4 · v1</span>
+      <div>
+        <div class="card-title">Resourceful Graduate</div>
+        <div class="card-company">Challenge Assessment</div>
+      </div>
+      <p class="card-desc">A workspace with wiki, file system, and an AI chat assistant (Alex). Scored on a Self-Reliance Index across three progressive tasks.</p>
+      <div class="card-meta">
+        <span class="meta-pill">3 tiers</span>
+        <span class="meta-pill">AI assistant</span>
+        <span class="meta-pill">20 min</span>
+      </div>
+      <div class="card-cta">Open prototype →</div>
+    </a>
+
+    <a href="labyrinthos/dist/index.html" class="card">
+      <span class="card-tag tag-r1">R1 · v1</span>
+      <div>
+        <div class="card-title">LabyrinthOS</div>
+        <div class="card-company">DataStream Inc. Assessment</div>
+      </div>
+      <p class="card-desc">A React-based OS sim with a file explorer, chatbot, and multi-phase challenge. Scored on resource discovery, hints used, and debrief quality.</p>
+      <div class="card-meta">
+        <span class="meta-pill">3 phases</span>
+        <span class="meta-pill">File explorer + bot</span>
+        <span class="meta-pill">45 min</span>
+      </div>
+      <div class="card-cta">Open prototype →</div>
+    </a>
+
+  </div>
+
+  <footer>Fortify internal use only · Results emailed to tom.flowerdew@wearefortify.ai</footer>
+
+</body>
+</html>
