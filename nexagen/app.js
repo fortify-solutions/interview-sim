@@ -1126,6 +1126,7 @@ function activateDeliverable(task) {
 
   const textarea = document.getElementById('response-area');
   textarea.value = '';
+  textarea.disabled = false;
   textarea.placeholder = 'Type your professional response here…';
   updateCharCount();
 
